@@ -97,6 +97,8 @@ body {
   font-size: 0.95rem;
   letter-spacing: 0.02em;
   text-decoration: none;
+  white-space: nowrap;
+  flex: 0 0 auto;
 }
 .btn--accent {
   background: var(--accent);
@@ -109,6 +111,15 @@ body {
   border: 1px solid var(--line);
 }
 .btn--ghost:hover { border-color: var(--accent-strong); color: var(--accent-strong); text-decoration: none; }
+.btn--icon {
+  padding: 0;
+  width: 48px;
+  justify-content: center;
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--line);
+}
+.btn--icon:hover { border-color: var(--accent-strong); color: var(--accent-strong); }
 
 /* ---- Section scaffolding --------------------------------------------- */
 .section { padding: 56px 0; }
@@ -141,6 +152,10 @@ body {
   font-size: 1.05rem;
   max-width: 46em;
 }
+
+/* ---- Header (removed) -------------------------------------------------- */
+/* No sticky navbar: this is a single long page, read top to bottom. The
+   floating back-to-top button above covers the wayfinding need on mobile. */
 
 /* ---- Back to top ------------------------------------------------------- */
 .back-to-top {
@@ -187,8 +202,8 @@ body {
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(180deg, rgba(11, 10, 9, 0.35) 0%, rgba(11, 10, 9, 0.55) 45%, rgba(11, 10, 9, 0.97) 92%),
-    linear-gradient(90deg, rgba(11, 10, 9, 0.85) 0%, rgba(11, 10, 9, 0.15) 65%);
+          linear-gradient(180deg, rgba(11, 10, 9, 0.35) 0%, rgba(11, 10, 9, 0.55) 45%, rgba(11, 10, 9, 0.97) 92%),
+          linear-gradient(90deg, rgba(11, 10, 9, 0.85) 0%, rgba(11, 10, 9, 0.15) 65%);
 }
 .hero-content {
   position: relative;
@@ -225,6 +240,7 @@ body {
   margin-top: 28px;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
   gap: 14px;
 }
 

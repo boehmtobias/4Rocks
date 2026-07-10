@@ -50,20 +50,20 @@
     var grid = document.getElementById("concert-grid");
     var all = (C.concerts || []).slice();
     var upcoming = all.filter(function (c) { return !isPastDate(c.date); })
-      .sort(function (a, b) { return String(a.date).localeCompare(String(b.date)); });
+        .sort(function (a, b) { return String(a.date).localeCompare(String(b.date)); });
     var past = all.filter(function (c) { return isPastDate(c.date); })
-      .sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
+        .sort(function (a, b) { return String(b.date).localeCompare(String(a.date)); });
     var concerts = upcoming.concat(past);
 
     if (!concerts.length) {
       grid.appendChild(el("p", { class: "concert-empty" },
-        "Aktuell sind keine neuen Auftritte geplant. Schaut bald wieder vorbei!"));
+          "Aktuell sind keine neuen Auftritte geplant. Schaut bald wieder vorbei!"));
       return;
     }
 
     if (!upcoming.length) {
       grid.appendChild(el("p", { class: "concert-empty" },
-        "Aktuell sind keine neuen Auftritte geplant. Schaut bald wieder vorbei!"));
+          "Aktuell sind keine neuen Auftritte geplant. Schaut bald wieder vorbei!"));
     }
 
     concerts.forEach(function (c) {
@@ -85,7 +85,7 @@
           loading: "lazy"
         });
         var placeholder = el("div", { class: "concert-map-placeholder" },
-          '<span class="pin" aria-hidden="true"></span><small>Kartenvorschau</small>');
+            '<span class="pin" aria-hidden="true"></span><small>Kartenvorschau</small>');
         placeholder.style.display = "none";
         img.addEventListener("error", function () {
           img.style.display = "none";
@@ -324,6 +324,15 @@
       row.appendChild(a);
       list.appendChild(row);
     });
+
+    if (contact.instagram && contact.instagram.url) {
+      var igRow = el("div", { class: "contact-row" });
+      igRow.appendChild(el("span", { class: "label" }, "Instagram"));
+      var igLink = el("a", { href: contact.instagram.url, target: "_blank", rel: "noopener" });
+      igLink.textContent = contact.instagram.handle || contact.instagram.url;
+      igRow.appendChild(igLink);
+      list.appendChild(igRow);
+    }
   }
 
   /* ---------- Back to top ---------- */

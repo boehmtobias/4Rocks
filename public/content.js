@@ -204,6 +204,7 @@ const CONTENT = {
     "phones": [
       { "name": "Heiner", "number": "0172 688 9940" },
       { "name": "Markus", "number": "0151 5804 8794" }
-    ]
+    ],
+    "instagram": { "handle": "@4Rocks_saarland", "url": "https://www.instagram.com/4Rocks_saarland/" }
   }
 };
