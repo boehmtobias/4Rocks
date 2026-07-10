@@ -2,16 +2,18 @@
 // -----------------------------------------------------------------------
 // This file is plain, strict JSON assigned to one global variable. Edit
 // the values below to update the live website — nothing else needs to
-// change. index.html reads window.CONTENT on page load and builds the
-// page from it.
+// change. index.html loads this as a normal script and reads CONTENT.
 //
-// Keep the object itself valid JSON: double-quoted keys and strings only,
-// no trailing commas, no comments and no functions inside the { ... }.
-// Comments (like this one) are only safe here, outside the braces.
-// If you are unsure whether your edit is valid, paste the object
-// (the part between the outer { and }) into a JSON validator.
+// Keep the object itself valid JSON: double-quoted keys and strings
+// only, no trailing commas, no functions. Comments (like the section
+// notes below) are fine as long as each one sits on its own line —
+// build.py strips whole-comment lines before parsing, since JSON itself
+// has no comment syntax. Never put a comment after real content on the
+// same line, and never use /* */ block comments.
+// If you are unsure whether an edit is still valid, paste the object
+// (the part between the outer { and }) into a JSON validator after
+// removing the // lines.
 // -----------------------------------------------------------------------
-
 const CONTENT = {
 
   // ---------------------------------------------------------------------

@@ -65,15 +65,34 @@ SOURCE_EXTENSIONS = {".jpg", ".jpeg", ".png"}
 
 
 def load_content():
-    """Pull the JSON object out of `const CONTENT = { ... };` in content.js."""
+    """Pull the JSON object out of `const CONTENT = { ... };` in content.js.
+
+    content.js is allowed to carry `//` documentation comments on their
+    own line even inside the object (that's how the shipped file is
+    written, for section-by-section explanations) — those lines are
+    stripped before parsing, since JSON itself has no comment syntax.
+    Only whole-line comments are touched, so `https://...` inside a
+    string value elsewhere on the file is never affected.
+    """
     text = CONTENT_JS.read_text(encoding="utf-8")
     match = re.search(r"const\s+CONTENT\s*=\s*(\{.*\})\s*;\s*$", text, re.S)
     if not match:
         sys.exit("build.py: could not find `const CONTENT = {...};` in " + str(CONTENT_JS))
+
+    json_text = strip_standalone_comment_lines(match.group(1))
     try:
-        return json.loads(match.group(1))
+        return json.loads(json_text)
     except json.JSONDecodeError as exc:
         sys.exit(f"build.py: content.js is not valid JSON inside the CONTENT object: {exc}")
+
+
+def strip_standalone_comment_lines(text):
+    """Remove lines that are only a `//` comment (whitespace then `//`).
+    A comment must not share a line with real JSON content, so this can't
+    accidentally cut into a string value like a URL."""
+    lines = text.split("\n")
+    kept = [line for line in lines if not line.strip().startswith("//")]
+    return "\n".join(kept)
 
 
 def coord_to_token(value):
