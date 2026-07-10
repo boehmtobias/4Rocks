@@ -71,10 +71,11 @@ than fetched.
       index.html
       style.css
       content.js
-      favicon.ico
+      app.js
       Pressetext_4Rocks.pdf
       images/
-        hero.webp
+        favicon.png, favicon-512.png, apple-touch-icon.png  -> site icons
+        hero.webp               -> hero background photo
         band/                   -> band member photos (committed as-is)
         videos/                 -> YouTube thumbnail posters
         maps/                   -> generated map thumbnails (build.py)
