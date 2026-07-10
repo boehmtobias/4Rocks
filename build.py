@@ -32,13 +32,15 @@ How this fits together:
     fetched).
 """
 
+import io
 import json
+import math
 import re
 import sys
 from pathlib import Path
 
 try:
-    from PIL import Image, ImageOps
+    from PIL import Image, ImageDraw, ImageOps
 except ImportError:
     sys.exit("Pillow is not installed. Run: pip install -r requirements.txt")
 
@@ -55,8 +57,14 @@ GALLERY_SRC_DIR = ROOT / "images-source" / "gallery"
 GALLERY_OUT_DIR = ROOT / "public" / "images" / "gallery" / "optimized"
 
 MAP_ZOOM = 15
-MAP_SIZE = "480x360"
+MAP_WIDTH = 480
+MAP_HEIGHT = 360
 MAP_TIMEOUT_SECONDS = 15
+MAP_PIN_COLOR = (255, 90, 31)  # matches --accent in style.css
+TILE_SIZE = 256
+# OSM's tile usage policy requires a descriptive User-Agent identifying
+# the app — see https://operations.osmfoundation.org/policies/tiles/
+TILE_USER_AGENT = "4RocksWebsiteBuild/1.0 (static map thumbnails; band website build script)"
 
 GALLERY_MAX_DIMENSION = 1600
 GALLERY_WEBP_QUALITY = 80
@@ -106,14 +114,72 @@ def map_filename(lat, lng):
     return f"{coord_to_token(lat)}_{coord_to_token(lng)}.png"
 
 
-def download(url, timeout):
+def download(url, timeout, headers=None):
     if requests is not None:
-        response = requests.get(url, timeout=timeout)
+        response = requests.get(url, timeout=timeout, headers=headers or {})
         response.raise_for_status()
         return response.content
     # Fallback if the `requests` package isn't available for some reason.
-    with urllib.request.urlopen(url, timeout=timeout) as response:  # noqa: S310
+    req = urllib.request.Request(url, headers=headers or {})
+    with urllib.request.urlopen(req, timeout=timeout) as response:  # noqa: S310
         return response.read()
+
+
+def latlng_to_global_pixel(lat, lng, zoom):
+    """Standard slippy-map projection: returns the (x, y) pixel position
+    of a lat/lng in the single giant image formed by all tiles at this
+    zoom level laid edge to edge (tile (0,0)'s top-left is pixel (0,0))."""
+    lat_rad = math.radians(lat)
+    n = 2 ** zoom
+    x = (lng + 180.0) / 360.0 * n * TILE_SIZE
+    y = (
+        (1.0 - math.log(math.tan(lat_rad) + 1.0 / math.cos(lat_rad)) / math.pi)
+        / 2.0
+        * n
+        * TILE_SIZE
+    )
+    return x, y
+
+
+def compose_map_image(lat, lng, zoom, width, height, timeout):
+    """Build a width x height map thumbnail centered on lat/lng by
+    stitching together whichever OSM tiles cover that area, then
+    drawing a pin at the exact center. Raises on any tile download
+    failure so the caller can skip this one thumbnail gracefully."""
+    center_x, center_y = latlng_to_global_pixel(lat, lng, zoom)
+    left = center_x - width / 2
+    top = center_y - height / 2
+
+    tile_x_min = math.floor(left / TILE_SIZE)
+    tile_x_max = math.floor((left + width - 1) / TILE_SIZE)
+    tile_y_min = math.floor(top / TILE_SIZE)
+    tile_y_max = math.floor((top + height - 1) / TILE_SIZE)
+
+    sheet_w = (tile_x_max - tile_x_min + 1) * TILE_SIZE
+    sheet_h = (tile_y_max - tile_y_min + 1) * TILE_SIZE
+    sheet = Image.new("RGB", (sheet_w, sheet_h), (230, 226, 219))
+
+    n = 2 ** zoom
+    for tx in range(tile_x_min, tile_x_max + 1):
+        for ty in range(tile_y_min, tile_y_max + 1):
+            wrapped_tx = tx % n  # wrap around the date line
+            tile_url = f"https://tile.openstreetmap.org/{zoom}/{wrapped_tx}/{ty}.png"
+            tile_bytes = download(tile_url, timeout, headers={"User-Agent": TILE_USER_AGENT})
+            with Image.open(io.BytesIO(tile_bytes)) as tile_img:
+                sheet.paste(tile_img.convert("RGB"), ((tx - tile_x_min) * TILE_SIZE, (ty - tile_y_min) * TILE_SIZE))
+
+    crop_left = round(left - tile_x_min * TILE_SIZE)
+    crop_top = round(top - tile_y_min * TILE_SIZE)
+    result = sheet.crop((crop_left, crop_top, crop_left + width, crop_top + height))
+
+    # Simple pin: a filled circle with a white ring, centered exactly on
+    # the coordinate (matches the site's --accent color).
+    draw = ImageDraw.Draw(result)
+    cx, cy = width / 2, height / 2
+    r = 8
+    draw.ellipse((cx - r, cy - r, cx + r, cy + r), fill=MAP_PIN_COLOR, outline=(255, 255, 255), width=3)
+
+    return result
 
 
 def build_maps(content):
@@ -134,18 +200,13 @@ def build_maps(content):
         if target.exists():
             continue
 
-        url = (
-            "https://staticmap.openstreetmap.de/staticmap.php"
-            f"?center={lat},{lng}&zoom={MAP_ZOOM}&size={MAP_SIZE}"
-            f"&markers={lat},{lng},red-pushpin"
-        )
-        print(f"[maps] fetching {filename} ...")
+        print(f"[maps] composing {filename} ...")
         try:
-            data = download(url, MAP_TIMEOUT_SECONDS)
-            target.write_bytes(data)
+            image = compose_map_image(lat, lng, MAP_ZOOM, MAP_WIDTH, MAP_HEIGHT, MAP_TIMEOUT_SECONDS)
+            image.save(target, "PNG")
             print(f"[maps] saved {filename}")
-        except Exception as exc:  # noqa: BLE001 — a flaky map service must not fail the build
-            print(f"[maps] WARNING: skipping {filename}, could not download it ({exc})")
+        except Exception as exc:  # noqa: BLE001 — a flaky tile server must not fail the build
+            print(f"[maps] WARNING: skipping {filename}, could not build it ({exc})")
 
     for existing in MAPS_DIR.glob("*.png"):
         if existing.name not in wanted:

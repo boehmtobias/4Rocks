@@ -36,10 +36,11 @@ automatically. You never touch `public/images/maps/` or
 `build.py` runs automatically before every Netlify deploy (configured
 in `netlify.toml`). It does two things:
 
-1. Reads the concerts in `public/content.js` and downloads a small map
-   thumbnail (from OpenStreetMap's free static map service, no API key)
-   for any concert whose thumbnail doesn't already exist in
-   `public/images/maps/`.
+1. Reads the concerts in `public/content.js` and, for any concert whose
+   thumbnail doesn't already exist in `public/images/maps/`, composes a
+   small map image directly from OpenStreetMap's own public map tiles
+   (no API key, no third-party wrapper service — the same tiles
+   openstreetmap.org itself renders) and drops a pin on the venue.
 2. Reads every photo in `images-source/gallery/` and creates an
    optimized WebP copy in `public/images/gallery/optimized/` for any
    photo that doesn't have one yet.
