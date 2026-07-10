@@ -1,3 +1,13 @@
+# OS / editor files
+.idea
 .DS_Store
-etc/images/.DS_Store
-etc/images/gallery/.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Netlify local dev
+.netlify/

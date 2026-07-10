@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<title>4Rocks | Saarländische Coverband</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Fünf begeisterte Musiker aus dem Köllertal bei Saarbrücken. Wir spielen Rock- und Pop-Klassiker aus fast vier Jahrzehnten, energetisch und unverfälscht. Termine, Videos, Fotos und Kontakt.">
+<link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512.png">
+<link rel="icon" type="image/png" sizes="64x64" href="images/favicon.png">
+<link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Manrope:wght@400;500;700;800&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<main id="main">
+  <a id="top"></a>
+
+  <!-- HERO -->
+  <section class="hero" aria-label="Willkommen">
+    <img class="hero-bg" src="images/hero.webp" alt="4Rocks live auf der Bühne" fetchpriority="high">
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-content">
+      <div class="wrap">
+        <p class="hero-logo">4<span>Rocks</span></p>
+        <h1 class="hero-title">Rockmusik von unserer Jugend bis heute.</h1>
+        <p class="hero-copy">Wir sind fünf begeisterte Musiker aus dem Köllertal bei Saarbrücken und bringen Rock- und Pop-Klassiker aus fast vier Jahrzehnten auf die Bühne. Energetisch und unverfälscht, von unserer Jugendzeit bis zu den ganz aktuellen Titeln von heute.</p>
+        <div class="hero-actions">
+          <a class="btn btn--accent" href="Pressetext_4Rocks.pdf" target="_blank" rel="noopener">Pressetext (PDF)</a>
+          <a class="btn btn--ghost" href="#concerts">Nächste Auftritte</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KOMMENDE AUFTRITTE -->
+  <section class="section" id="concerts" aria-labelledby="concerts-title" data-screen-label="Kommende Auftritte">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Termine</span>
+        <h2 class="section-title" id="concerts-title">Kommende Auftritte</h2>
+      </div>
+      <div class="concert-grid" id="concert-grid"></div>
+    </div>
+  </section>
+
+  <!-- VIDEO HIGHLIGHTS -->
+  <section class="section" id="videos" aria-labelledby="videos-title" data-screen-label="Video Highlights">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Zum Reinhören</span>
+        <h2 class="section-title" id="videos-title">Video Highlights</h2>
+      </div>
+      <div class="video-grid" id="video-grid"></div>
+    </div>
+  </section>
+
+  <!-- GALERIE -->
+  <section class="section" id="gallery" aria-labelledby="gallery-title" data-screen-label="Galerie">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Impressionen</span>
+        <h2 class="section-title" id="gallery-title">Galerie</h2>
+      </div>
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <!-- AKTUELLE SETLISTE -->
+  <section class="section" id="setlist" aria-labelledby="setlist-title" data-screen-label="Aktuelle Setliste">
+    <div class="wrap">
+      <div class="section-head setlist-intro">
+        <span class="eyebrow">Repertoire</span>
+        <h2 class="section-title" id="setlist-title">Aktuelle Setliste</h2>
+        <p class="section-lede">Hier ein Auszug aus unserem Repertoire, der unseren Musikgeschmack zeigt.<br>Song-Wünsche sind natürlich immer willkommen!</p>
+      </div>
+      <div class="setlist-groups" id="setlist-groups"></div>
+    </div>
+  </section>
+
+  <!-- BAND UND KONTAKT -->
+  <section class="section" id="contact" aria-labelledby="band-title" data-screen-label="Band und Kontakt">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Wer wir sind</span>
+        <h2 class="section-title" id="band-title">Band und Kontakt</h2>
+      </div>
+      <div class="band-grid" id="band-grid"></div>
+      <div class="contact-block">
+        <h3 class="contact-title">Kontakt</h3>
+        <div class="contact-list" id="contact-list"></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Erstellt von Tobias Böhm.</p>
+    <p>&copy; <span id="footer-year"></span> 4Rocks</p>
+  </div>
+</footer>
+
+<a class="back-to-top" id="back-to-top" href="#top" aria-label="Nach oben">&uarr;</a>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Bildansicht" hidden>
+  <figure class="lightbox-figure">
+    <button class="lightbox-close" id="lightbox-close" type="button" aria-label="Schließen">&times;</button>
+    <button class="lightbox-nav lightbox-nav--prev" id="lightbox-prev" type="button" aria-label="Vorheriges Bild">&#8249;</button>
+    <button class="lightbox-nav lightbox-nav--next" id="lightbox-next" type="button" aria-label="Nächstes Bild">&#8250;</button>
+    <div class="lightbox-img-wrap">
+      <img id="lightbox-img" src="" alt="">
+    </div>
+    <figcaption class="lightbox-caption">
+      <strong id="lightbox-caption-title"></strong>
+      <span id="lightbox-caption-desc"></span>
+    </figcaption>
+  </figure>
+</div>
+
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
