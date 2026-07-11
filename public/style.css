@@ -343,9 +343,16 @@ body {
   color: var(--text-dim);
   font-size: 0.98rem;
 }
-.concert-route {
+.concert-links {
   margin-top: auto;
   padding-top: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 6px 16px;
+}
+.concert-route,
+.concert-poster-link {
   font-weight: 700;
   font-size: 0.88rem;
   color: var(--accent-strong);

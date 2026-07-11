@@ -108,9 +108,15 @@
       venue.textContent = c.venue || "";
       body.appendChild(venue);
 
+      var links = el("div", { class: "concert-links" });
       if (c.mapLink) {
-        var route = el("a", { class: "concert-route", href: c.mapLink, target: "_blank", rel: "noopener" }, "Route anzeigen \u2192");
-        body.appendChild(route);
+        links.appendChild(el("a", { class: "concert-route", href: c.mapLink, target: "_blank", rel: "noopener" }, "Route anzeigen \u2192"));
+      }
+      if (c.posterPath) {
+        links.appendChild(el("a", { class: "concert-poster-link", href: c.posterPath, target: "_blank", rel: "noopener" }, "Poster anzeigen \u2192"));
+      }
+      if (links.children.length) {
+        body.appendChild(links);
       } else if (!hasCoords) {
         body.appendChild(el("p", { class: "concert-venue" }, "Kein Kartenlink hinterlegt."));
       }

@@ -28,6 +28,11 @@ const CONTENT = {
   // Concerts in the past are detected automatically (by comparing "date"
   // to today) and shown faded with a "Vergangen" tag rather than being
   // deleted, so you don't have to remove old entries by hand.
+  //
+  // "posterPath" is optional (leave it out and no poster link shows at
+  // all). To add one: drop the PDF into public/posters/, then set
+  // "posterPath" to "posters/<filename>.pdf". A "Poster anzeigen" link
+  // then appears next to "Route anzeigen" on that concert's card.
   // ---------------------------------------------------------------------
   "concerts": [
     {
@@ -37,6 +42,15 @@ const CONTENT = {
       "mapLink": "https://maps.app.goo.gl/CrD4NShHysS1m4gq6",
       "lat": 49.45165754787445,
       "lng": 7.055258332979755
+    },
+    {
+      "date": "2026-08-14",
+      "title": "Konzert im Innenhof bei Sylvia Mariani, Start 19 Uhr",
+      "venue": "Saarbrücker Str., Heusweiler",
+      "mapLink": "https://maps.app.goo.gl/Ghd4xzRFW6Ein6Lh7",
+      "lat": 49.332186540672495,
+      "lng": 6.931465437668756,
+      "posterPath": "posters/4Rocks_Poster_Konzert_2026-08-14.jpeg"
     },
     {
       "date": "2026-08-16",

@@ -1,7 +1,5 @@
 # 4Rocks website
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/9cc82c19-2841-43bc-a831-0fea3cb64d8f/deploy-status)](https://app.netlify.com/projects/4rocks/deploys)
-
 Plain static site. No framework, no bundler, no backend. Deployed to
 Netlify by pushing to this repo's connected GitLab remote — Netlify
 auto-deploys on every push.
@@ -76,6 +74,7 @@ than fetched.
       content.js
       app.js
       Pressetext_4Rocks.pdf
+      posters/                -> concert poster files (optional, see content.js)
       images/
         favicon.png, favicon-512.png, apple-touch-icon.png  -> site icons
         hero.webp               -> hero background photo
