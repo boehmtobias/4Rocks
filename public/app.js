@@ -113,7 +113,8 @@
         links.appendChild(el("a", { class: "concert-route", href: c.mapLink, target: "_blank", rel: "noopener" }, "Route anzeigen \u2192"));
       }
       if (c.posterPath) {
-        links.appendChild(el("a", { class: "concert-poster-link", href: c.posterPath, target: "_blank", rel: "noopener" }, "Poster anzeigen \u2192"));
+        links.appendChild(el("a", { class: "concert-poster-link", href: c.posterPath, target: "_blank", rel: "noopener" },
+            "Poster anzeigen <svg width=\"14\" height=\"14\" viewBox=\"0 0 24 24\" fill=\"none\" aria-hidden=\"true\"><path d=\"M6 2.5h9l5 5v13a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1z\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/><path d=\"M14.5 2.5V8a1 1 0 0 0 1 1h5.5\" stroke=\"currentColor\" stroke-width=\"1.8\" stroke-linejoin=\"round\"/></svg>"));
       }
       if (links.children.length) {
         body.appendChild(links);

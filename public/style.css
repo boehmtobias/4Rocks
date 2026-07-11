@@ -357,6 +357,11 @@ body {
   font-size: 0.88rem;
   color: var(--accent-strong);
 }
+.concert-poster-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
 .concert-empty,
 .gallery-empty {
   border: 1px dashed var(--line);
