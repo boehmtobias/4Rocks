@@ -31,21 +31,37 @@ const CONTENT = {
   // ---------------------------------------------------------------------
   "concerts": [
     {
-      "date": "2026-01-30",
-      "title": "Konzert bei La Comodita",
-      "venue": "Riegelsberghalle, Riegelsberg",
-      "mapLink": "https://maps.app.goo.gl/Rw4KQCEN1VE3uDMg8",
-      "lat": 49.30765,
-      "lng": 6.937374
-    },
-    {
       "date": "2026-06-20",
       "title": "Konzert bei Treff am Brunnen",
       "venue": "Marienstraße, Marpingen",
       "mapLink": "https://maps.app.goo.gl/CrD4NShHysS1m4gq6",
       "lat": 49.45165754787445,
       "lng": 7.055258332979755
-    }
+    },
+    {
+      "date": "2026-08-16",
+      "title": "Konzert vor der alten Schmiede, Start 19 Uhr",
+      "venue": "Alsweilerstraße, Marpingen",
+      "mapLink": "https://maps.app.goo.gl/RCygcfth9XgSMWzK9",
+      "lat": 49.45189418247456,
+      "lng": 7.056893756439192
+    },
+    {
+      "date": "2026-09-26",
+      "title": "Konzert bei Jochems Kneipe, Start 20 Uhr",
+      "venue": "Saarbrücker Str., Riegelsberg",
+      "mapLink": "https://maps.app.goo.gl/j2FQ6xpyGk12p9fCA",
+      "lat": 49.31823699503666,
+      "lng": 6.940415770528488
+    },
+    {
+      "date": "2026-10-02",
+      "title": "Konzert bei La Comodita, Start 18 Uhr",
+      "venue": "Riegelsberghalle, Riegelsberg",
+      "mapLink": "https://maps.app.goo.gl/2Bst6KSYbPG1uUkP8",
+      "lat": 49.307656073968566,
+      "lng": 6.937373323679641
+    },
   ],
 
   // ---------------------------------------------------------------------
