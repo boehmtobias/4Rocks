@@ -179,7 +179,9 @@ const CONTENT = {
         { "title": "Dreadlock Holiday", "artist": "10CC" },
         { "title": "All Right Now", "artist": "Free" },
         { "title": "Lucky Man", "artist": "Emerson Lake and Palmer" },
-        { "title": "The Letter", "artist": "The Box Tops" }
+        { "title": "The Letter", "artist": "The Box Tops" },
+        { "title": "Baby", "artist": "Royal Republik" },
+        { "title": "Perfect Stranger", "artist": "Deep Purple" }
       ]
     },
     {
@@ -197,7 +199,9 @@ const CONTENT = {
         { "title": "White Wedding", "artist": "Billy Idol" },
         { "title": "Kayleigh", "artist": "Marillion" },
         { "title": "Don't You Forget About Me", "artist": "Simple Minds" },
-        { "title": "Billie Jean", "artist": "Bates" }
+        { "title": "Billie Jean", "artist": "Bates" },
+        { "title": "Pretty Women", "artist": "Van Halen" },
+        { "title": "Bad case of loving you/Doctor Doctor", "artist": "Robert Palmer" }
       ]
     },
     {
