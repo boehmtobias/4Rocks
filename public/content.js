@@ -119,6 +119,11 @@ const CONTENT = {
   // are also used as the image's alt text.
   // ---------------------------------------------------------------------
   "galleryImages": [
+    { "src": "images/gallery/optimized/2026-06-20_1.webp", "caption": "Konzert bei Treff am Brunnen in Marpingen, 20.06.2026", "description": "Die Band live auf der Bühne in Marpingen." },
+    { "src": "images/gallery/optimized/2026-06-20_2.webp", "caption": "Konzert bei Treff am Brunnen in Marpingen, 20.06.2026", "description": "Die Band live auf der Bühne in Marpingen." },
+    { "src": "images/gallery/optimized/2026-06-20_3.webp", "caption": "Konzert bei Treff am Brunnen in Marpingen, 20.06.2026", "description": "Die Band live auf der Bühne in Marpingen." },
+    { "src": "images/gallery/optimized/2026-06-20_4.webp", "caption": "Konzert bei Treff am Brunnen in Marpingen, 20.06.2026", "description": "Die Band live auf der Bühne in Marpingen." },
+
     { "src": "images/gallery/optimized/2026-01-30_1.webp", "caption": "Konzert bei La Comodita in der Riegelsberghalle, 30.01.2026", "description": "Die Band live auf der Bühne in der Riegelsberghalle." },
     { "src": "images/gallery/optimized/2026-01-30_2.webp", "caption": "Konzert bei La Comodita in der Riegelsberghalle, 30.01.2026", "description": "Die Band live auf der Bühne in der Riegelsberghalle." },
     { "src": "images/gallery/optimized/2026-01-30_3.webp", "caption": "Konzert bei La Comodita in der Riegelsberghalle, 30.01.2026", "description": "Die Band live auf der Bühne in der Riegelsberghalle." },
